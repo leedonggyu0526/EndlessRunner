@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
 
     int score;
     public static GameManager inst;
+    public GameObject chaser;
+    public float delay = 3f;
 
     [SerializeField] Text scoreText;
 
@@ -17,7 +19,15 @@ public class GameManager : MonoBehaviour {
         inst = this;
     }
 
-    private void Start () {
+    private void Start()
+    {
+        StartCoroutine(SpawnChaserAfterDelay(delay));
+    }
+
+    private IEnumerator SpawnChaserAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Instantiate(chaser, new Vector3(0, 0, 5), Quaternion.identity);
     }
 
 	private void Update () {

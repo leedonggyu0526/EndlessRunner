@@ -453,6 +453,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bec8f03316e1c4c92a0d39762617a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chaser: {fileID: 5689539753536486526, guid: 37e32b2009494854db49ee6d27a6492d, type: 3}
+  delay: 3
   scoreText: {fileID: 87844852}
   playerMovement: {fileID: 1186968288}
 --- !u!4 &863502732
@@ -588,6 +590,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c623b961c9d374cb32e389f185eab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1280317882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5986001714316308101, guid: 28baf2b6860369c46b4476384f40190e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1802381863}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1292635933
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +739,7 @@ PrefabInstance:
     - target: {fileID: 944766026944380089, guid: 28baf2b6860369c46b4476384f40190e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3876198702211477848, guid: 28baf2b6860369c46b4476384f40190e,
         type: 3}
@@ -843,6 +851,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7574398171276972152, guid: 28baf2b6860369c46b4476384f40190e,
+        type: 3}
+      propertyPath: gameOverPanel
+      value: 
+      objectReference: {fileID: 1280317882}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
