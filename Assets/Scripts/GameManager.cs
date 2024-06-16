@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
             playerMovement.enabled = true;
         }
         score++;
-        scoreText.text = "SCORE: " + score;
+        scoreText.text = "Score: " + score;
 
         playerMovement.speed += playerMovement.speedIncreasePerPoint;
     }

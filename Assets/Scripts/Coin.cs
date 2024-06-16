@@ -1,35 +1,43 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
-public class Coin : MonoBehaviour {
+public class Coin : MonoBehaviour
+{
+    [SerializeField] private float turnSpeed = 90f;
+    [SerializeField] private ParticleSystem coinParticleEffect; // 파티클 시스템 참조
+    [SerializeField] private AudioClip coinPickupSound; // 코인 효과음 참조
 
-    [SerializeField] float turnSpeed = 90f;
+    private AudioSource audioSource;
 
-    private void OnTriggerEnter (Collider other)
+    private void Awake()
     {
-        if (other.gameObject.GetComponent<Obstacle>() != null) {
-            Destroy(gameObject);
-            return;
-        }
-
-        // Check that the object we collided with is the player
-        if (other.gameObject.tag != "Player") {
-            return;
-        }
-
-        // Add to the player's score
-        GameManager.inst.IncrementScore();
-
-        // Destroy this coin object
-        Destroy(gameObject);
+        // AudioSource 컴포넌트 추가 및 설정
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
 
-    private void Start () {
+    private void OnTriggerEnter(Collider other)
+    {
+        // 플레이어와 충돌 여부 확인
+        if (other.CompareTag("Player"))
+        {
+            //Debug.Log("Coin picked up!");
+            // 점수 증가
+            GameManager.inst.IncrementScore();
 
-	}
+            // 파티클 이펙트 재생
+            Instantiate(coinParticleEffect, transform.position, Quaternion.identity);
 
-	private void Update () {
-        transform.Rotate(0, 0, turnSpeed * Time.deltaTime);
-	}
+            // 효과음 재생
+            audioSource.PlayOneShot(coinPickupSound);
+
+            // 코인 오브젝트 파괴
+            Destroy(gameObject, coinPickupSound.length); // 효과음 재생 후 오브젝트 파괴
+        }
+    }
+
+    private void Update()
+    {
+        // 코인 오브젝트 회전
+        transform.Rotate(0, turnSpeed * Time.deltaTime, 0);
+    }
 }
