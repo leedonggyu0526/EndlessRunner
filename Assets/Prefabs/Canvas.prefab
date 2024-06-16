@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4171069929291477315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -838,7 +838,6 @@ GameObject:
   - component: {fileID: 7894597696236649951}
   - component: {fileID: 4051289300622433150}
   - component: {fileID: 7574398171276972152}
-  - component: {fileID: 8254396899291667515}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -948,30 +947,6 @@ MonoBehaviour:
   scoreText: {fileID: 3789309714980875162}
   exitButton: {fileID: 4095099286349020161}
   restartButton: {fileID: 473672025829748014}
-  gameOverPanel: {fileID: 5986001714316308101}
---- !u!114 &8254396899291667515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4222951615786614675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c623b961c9d374cb32e389f185eab7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  rb: {fileID: 0}
-  horizontalMultiplier: 2
-  speedIncreasePerPoint: 0.1
-  jumpForce: 400
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 0
-  jumpCooldown: 1
-  prefab: {fileID: 0}
-  deathClip: {fileID: 0}
 --- !u!1 &5986001714316308101
 GameObject:
   m_ObjectHideFlags: 0

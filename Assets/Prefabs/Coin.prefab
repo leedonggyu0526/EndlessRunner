@@ -30,13 +30,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681084056512101516}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.05, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &681084056512101512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f0265d46a5c525468aa552e603ce5e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 90
+  turnSpeed: 5
   coinParticleEffect: {fileID: 3730314728196004784, guid: fb3422924bdb2834dba3d18e1e823939,
     type: 3}
   coinPickupSound: {fileID: 8300000, guid: 1526f710cb9cd1442a19e3bdf9b0fcc4, type: 3}

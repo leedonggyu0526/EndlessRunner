@@ -40,6 +40,13 @@ public class GameStarter : MonoBehaviour
 #endif
     }
 
+    public static void GameOver()
+    {
+        gameStarted = false;
+        GameStarter instance = FindObjectOfType<GameStarter>();
+        instance.gameOverPanel.SetActive(true); // 게임오버 패널 활성화
+    }
+
     void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

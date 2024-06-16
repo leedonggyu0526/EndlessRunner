@@ -2,7 +2,7 @@
 
 public class Coin : MonoBehaviour
 {
-    [SerializeField] private float turnSpeed = 90f;
+    [SerializeField] private float turnSpeed = 5f;
     [SerializeField] private ParticleSystem coinParticleEffect; // 파티클 시스템 참조
     [SerializeField] private AudioClip coinPickupSound; // 코인 효과음 참조
 
@@ -25,19 +25,22 @@ public class Coin : MonoBehaviour
             GameManager.inst.IncrementScore();
 
             // 파티클 이펙트 재생
-            Instantiate(coinParticleEffect, transform.position, Quaternion.identity);
+            var particleEffect = Instantiate(coinParticleEffect, transform.position, Quaternion.identity);
+            particleEffect.transform.parent = transform; // 파티클 이펙트를 코인의 자식 오브젝트로 설정
 
             // 효과음 재생
             audioSource.PlayOneShot(coinPickupSound);
 
             // 코인 오브젝트 파괴
             Destroy(gameObject, coinPickupSound.length); // 효과음 재생 후 오브젝트 파괴
+
+            // 파티클 이펙트 제거
         }
     }
 
     private void Update()
     {
         // 코인 오브젝트 회전
-        transform.Rotate(0, turnSpeed * Time.deltaTime, 0);
+        transform.Rotate(0, 0, turnSpeed);
     }
 }

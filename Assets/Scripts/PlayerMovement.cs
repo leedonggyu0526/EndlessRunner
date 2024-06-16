@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     private float lastJumpTime;
     public float jumpCooldown = 1f; // 점프 쿨다운 시간 (초 단위)
 
-    [SerializeField] private GameObject prefab;
     private BackgroundMusicController backgroundMusicController;
     private AudioSource audioSource;
     public AudioClip deathClip;
@@ -76,9 +75,7 @@ public class PlayerMovement : MonoBehaviour
     public void Die()
     {
         alive = false;
-        // Restart the game
-        GameStarter.gameStarted = false; // 게임 시작 상태를 false로 설정
-        FindObjectOfType<GameStarter>().gameOverPanel.SetActive(true);
+        GameStarter.GameOver();
         backgroundMusicController.StopMusic();
         PlayDeathSound();
     }
