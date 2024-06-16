@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float lastJumpTime;
     public float jumpCooldown = 1f; // 점프 쿨다운 시간 (초 단위)
+
+    [SerializeField] private GameObject prefab;
     Animator anim;
 
     private void Awake()
@@ -62,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
     {
         float height = GetComponent<Collider>().bounds.size.y;
         bool isGrounded = Physics.Raycast(transform.position, Vector3.down, (height / 2) + 0.1f, groundMask);
-        anim.SetBool("isGrounded", !isGrounded); // Update the "isGrounded" boolean variable in the animation controller
 
         if (isGrounded)
         {
