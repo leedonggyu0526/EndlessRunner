@@ -9,10 +9,9 @@ public class CameraFollow : MonoBehaviour {
         offset = transform.position - player.position;
 	}
 
-    private void Update()
-    {
-        Vector3 targetPos = player.position - player.forward * offset.magnitude;
-        targetPos.y = offset.y;
+	private void Update () {
+        Vector3 targetPos = player.position + offset;
+        targetPos.x = 0;
         transform.position = targetPos;
-    }
+	}
 }

@@ -12,7 +12,7 @@ public class GroundTile : MonoBehaviour
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
     }
 
-    private void OnTriggerExit(Collider collider)
+    private void OnTriggerExit (Collider other)
     {
         Debug.Log("Triggered");
         if (collider.gameObject.name == "EndPoint")
@@ -23,7 +23,7 @@ public class GroundTile : MonoBehaviour
         }
     }
 
-    public void SpawnObstacle()
+    public void SpawnObstacle ()
     {
         int obstacleSpawn = 10;
         GameObject[] targetObjects = GameObject.FindGameObjectsWithTag("Road");
@@ -51,7 +51,7 @@ public class GroundTile : MonoBehaviour
     }
 
 
-    public void SpawnCoins()
+    public void SpawnCoins ()
     {
         int coinSpawn = 10;
         GameObject[] targetObjects = GameObject.FindGameObjectsWithTag("Road");
