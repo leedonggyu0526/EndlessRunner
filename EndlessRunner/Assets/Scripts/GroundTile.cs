@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 
-public class GroundTile : MonoBehaviour {
+public class GroundTile : MonoBehaviour
+{
 
     GroundSpawner groundSpawner;
     [SerializeField] GameObject coinPrefab;
     [SerializeField] GameObject obstaclePrefab;
 
-    private void Start () {
+    private void Start()
+    {
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
-	}
+    }
 
     private void OnTriggerExit(Collider collider)
     {
@@ -49,7 +51,7 @@ public class GroundTile : MonoBehaviour {
     }
 
 
-    public void SpawnCoins ()
+    public void SpawnCoins()
     {
         int coinSpawn = 10;
         GameObject[] targetObjects = GameObject.FindGameObjectsWithTag("Road");
