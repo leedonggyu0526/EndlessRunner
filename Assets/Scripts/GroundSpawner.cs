@@ -15,9 +15,9 @@ public class GroundSpawner : MonoBehaviour
         nextSpawnRotation = temp.transform.Find("EndPoint").rotation;
 
         if (spawnItems)
-        {   
-            temp.GetComponent<GroundTile>().SpawnObstacle();
-            temp.GetComponent<GroundTile>().SpawnCoins();
+        {
+            temp.GetComponent<GroundTile>().SpawnObstacle(temp);
+            temp.GetComponent<GroundTile>().SpawnCoins(temp);
         }
     }
 

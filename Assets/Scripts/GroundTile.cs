@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class GroundTile : MonoBehaviour
 {
@@ -12,27 +13,43 @@ public class GroundTile : MonoBehaviour
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
     }
 
-    private void OnTriggerExit(Collider collider)
+    public void EndPointReact(Collider collider)
     {
-        Debug.Log("Triggered");
-        if (collider.gameObject.name == "EndPoint")
+        //Debug.Log("Triggered");
+        //Debug.Log(collider.gameObject.name);
+        if (collider.gameObject.name == "Player")
         {
-            Debug.Log("Spawn");
+            //Debug.Log("Spawn");
             groundSpawner.SpawnTile(true);
             Destroy(gameObject, 2);
         }
     }
 
-    public void SpawnObstacle()
+    public void SpawnObstacle(GameObject ground)
     {
         int obstacleSpawn = 10;
-        GameObject[] targetObjects = GameObject.FindGameObjectsWithTag("Road");
+        List<GameObject> targetObjects = FindChildObjectsWithTag(ground, "Road");
         for (int i = 0; i < obstacleSpawn; i++)
         {
             GameObject temp = Instantiate(obstaclePrefab, transform);
-            if (targetObjects.Length > 0)
+            if (targetObjects.Count > 0)
             {
-                GameObject targetObject = targetObjects[i % targetObjects.Length];
+                GameObject targetObject = targetObjects[i % targetObjects.Count];
+                temp.transform.position = GetRandomPointAboveObject(targetObject);
+            }
+        }
+    }
+
+    public void SpawnCoins(GameObject ground)
+    {
+        int coinSpawn = 10;
+        List<GameObject> targetObjects = FindChildObjectsWithTag(ground, "Road");
+        for (int i = 0; i < coinSpawn; i++)
+        {
+            GameObject temp = Instantiate(coinPrefab, transform);
+            if (targetObjects.Count > 0)
+            {
+                GameObject targetObject = targetObjects[i % targetObjects.Count];
                 temp.transform.position = GetRandomPointAboveObject(targetObject);
             }
         }
@@ -51,18 +68,20 @@ public class GroundTile : MonoBehaviour
     }
 
 
-    public void SpawnCoins()
+
+    List<GameObject> FindChildObjectsWithTag(GameObject parent, string tag)
     {
-        int coinSpawn = 10;
-        GameObject[] targetObjects = GameObject.FindGameObjectsWithTag("Road");
-        for (int i = 0; i < coinSpawn; i++)
+        List<GameObject> taggedObjects = new List<GameObject>();
+
+        foreach (Transform child in parent.transform)
         {
-            GameObject temp = Instantiate(coinPrefab, transform);
-            if (targetObjects.Length > 0)
+            if (child.CompareTag(tag))
             {
-                GameObject targetObject = targetObjects[i % targetObjects.Length];
-                temp.transform.position = GetRandomPointAboveObject(targetObject);
+                taggedObjects.Add(child.gameObject);
             }
         }
+
+        return taggedObjects;
     }
+
 }
