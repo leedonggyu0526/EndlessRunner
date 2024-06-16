@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
@@ -20,11 +19,9 @@ public class PlayerMovement : MonoBehaviour
     private float lastJumpTime;
     public float jumpCooldown = 1f; // 점프 쿨다운 시간 (초 단위)
 
-    [SerializeField] private GameObject prefab;
-
     private void FixedUpdate()
     {
-        if (!alive) return;
+        if (!alive || !GameStarter.gameStarted) return; // 게임 시작되지 않으면 움직이지 않음
 
         Vector3 forwardMove = transform.forward * speed * Time.fixedDeltaTime;
         Vector3 horizontalMove = transform.right * horizontalInput * speed * Time.fixedDeltaTime * horizontalMultiplier;
@@ -33,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!GameStarter.gameStarted) return; // 게임 시작되지 않으면 업데이트 중지
+
         horizontalInput = Input.GetAxis("Horizontal");
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastJumpTime + jumpCooldown)
@@ -44,23 +43,13 @@ public class PlayerMovement : MonoBehaviour
         {
             Die();
         }
-
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            RotatePlayerAndCamera();
-        }
     }
 
     public void Die()
     {
         alive = false;
-        // Restart the game
-        Invoke("Restart", 2);
-    }
-
-    void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameStarter.gameStarted = false; // 게임 시작 상태를 false로 설정
+        FindObjectOfType<GameStarter>().gameOverPanel.SetActive(true); // 게임오버 패널 활성화
     }
 
     void Jump()
@@ -72,38 +61,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             lastJumpTime = Time.time; // 마지막 점프 시간 업데이트
-        }
-    }
-
-    void RotatePlayerAndCamera()
-    {
-        if(CheckObjectsBelow().name == "Road_Left_Corner")
-        {   
-            Quaternion targetRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0f, -90f, 0f));
-            transform.rotation = targetRotation;
-
-            Quaternion cameraTargetRotation = Quaternion.Euler(Camera.main.transform.eulerAngles + new Vector3(0f, -90f, 0f));
-            Camera.main.transform.rotation = cameraTargetRotation;
-        }else if(CheckObjectsBelow().name == "Road_Right_Corner")
-        {
-            Quaternion targetRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0f, 90f, 0f));
-            transform.rotation = targetRotation;
-
-            Quaternion cameraTargetRotation = Quaternion.Euler(Camera.main.transform.eulerAngles + new Vector3(0f, 90f, 0f));
-            Camera.main.transform.rotation = cameraTargetRotation;
-        }
-    }
-    private GameObject CheckObjectsBelow()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit))
-        {
-            GameObject objectBelow = hit.collider.gameObject;
-            return objectBelow;
-        }
-        else
-        {
-            return null;
         }
     }
 }
