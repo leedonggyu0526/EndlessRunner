@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Chaser : MonoBehaviour
 {
-    // Start is called before the first frame update
+    NavMeshAgent agent;
+    Transform Player;
+
+    public float chaseSpeed = 12f; 
+
     void Start()
     {
-        
+        agent = this.GetComponent<NavMeshAgent>();
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        agent.SetDestination(Player.position);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        agent.speed = chaseSpeed + GameManager.inst.GetScore();
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        agent.SetDestination(Player.position);
     }
 }

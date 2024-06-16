@@ -45,4 +45,8 @@ public class GameManager : MonoBehaviour {
 
         playerMovement.speed += playerMovement.speedIncreasePerPoint;
     }
+    public int GetScore()
+    {
+        return score;
+    }
 }

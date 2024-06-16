@@ -26,15 +26,13 @@ public class Coin : MonoBehaviour
 
             // 파티클 이펙트 재생
             var particleEffect = Instantiate(coinParticleEffect, transform.position, Quaternion.identity);
-            particleEffect.transform.parent = transform; // 파티클 이펙트를 코인의 자식 오브젝트로 설정
+            Destroy(particleEffect.gameObject, 2f); // 파티클 이펙트를 2초 후에 파괴
 
             // 효과음 재생
             audioSource.PlayOneShot(coinPickupSound);
 
             // 코인 오브젝트 파괴
             Destroy(gameObject, coinPickupSound.length); // 효과음 재생 후 오브젝트 파괴
-
-            // 파티클 이펙트 제거
         }
     }
 

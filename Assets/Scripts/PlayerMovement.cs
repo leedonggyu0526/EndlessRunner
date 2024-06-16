@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     [SerializeField] float horizontalMultiplier = 2;
 
-    public float speedIncreasePerPoint = 0.1f;
+    public float speedIncreasePerPoint = 0.3f;
 
     [SerializeField] float jumpForce = 400f;
     [SerializeField] LayerMask groundMask;
@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastJumpTime + jumpCooldown)
         {
+            //Debug.Log("Jump");
             Jump();
         }
 
@@ -68,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
+            //Debug.Log("Rotate");
             RotatePlayerAndCamera();
         }
     }
@@ -87,21 +89,21 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        float height = GetComponent<Collider>().bounds.size.y;
-        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, (height / 2) + 0.1f, groundMask);
-
-        if (isGrounded)
+        if (!animator.GetBool("Jump"))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             lastJumpTime = Time.time; // 마지막 점프 시간 업데이트
             animator.SetBool("Jump", true);
+            isGrounded = false;
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
         animator.SetBool("Jump", false);
+        isGrounded = true;
         if (collision.gameObject.CompareTag("Obstacle"))
-        {
+        {   
+            //Debug.Log(collision.gameObject.tag);
             animator.SetTrigger("HitObstacle"); // HitObstacle 트리거 설정하여 넘어지는 애니메이션 재생
             Die(); // 죽음 처리
         }
@@ -109,14 +111,18 @@ public class PlayerMovement : MonoBehaviour
 
     void RotatePlayerAndCamera()
     {
-        if(CheckObjectsBelow().name == "Road_Left_Corner")
+        GameObject belowObject = CheckObjectsBelow();
+        Debug.Log(belowObject);
+        if (belowObject == null) {
+            Debug.Log("isNull");
+        }else if(belowObject.name == "Road_Left_Corner")
         {   
             Quaternion targetRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0f, -90f, 0f));
             transform.rotation = targetRotation;
 
             Quaternion cameraTargetRotation = Quaternion.Euler(Camera.main.transform.eulerAngles + new Vector3(0f, -90f, 0f));
             Camera.main.transform.rotation = cameraTargetRotation;
-        }else if(CheckObjectsBelow().name == "Road_Right_Corner")
+        }else if(belowObject.name == "Road_Right_Corner")
         {
             Quaternion targetRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0f, 90f, 0f));
             transform.rotation = targetRotation;
@@ -128,7 +134,8 @@ public class PlayerMovement : MonoBehaviour
     private GameObject CheckObjectsBelow()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit))
+        bool isHit = Physics.Raycast(transform.position + new Vector3(0, 0.1f, 0), Vector3.down, out hit);
+        if (isHit)
         {
             GameObject objectBelow = hit.collider.gameObject;
             return objectBelow;
