@@ -313,8 +313,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTile:
   - {fileID: 2927764148319958449, guid: bdbb13e7dbdfa124fbcef0f8177090aa, type: 3}
-  - {fileID: 1023338372448331132, guid: 39ec3d35421eca441bd3f7fdc74cccae, type: 3}
-  - {fileID: 7956678461269902971, guid: 7bfd3c36e89a1024d91ee7c4e8257c3a, type: 3}
+  - {fileID: 7651240692615426873, guid: 7ddd2d3995723a8439618a41b270dea8, type: 3}
+  - {fileID: 3642706248377982924, guid: 81fc2e62101dd6a4db46dfdaa7cc4a19, type: 3}
 --- !u!4 &126221220
 Transform:
   m_ObjectHideFlags: 0
@@ -557,7 +557,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 5, z: -10}
+  m_LocalPosition: {x: 0, y: 5, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -875,7 +875,7 @@ PrefabInstance:
     - target: {fileID: 5936290499818747066, guid: aec99d7922192a3418621cecced9cbbc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5936290499818747066, guid: aec99d7922192a3418621cecced9cbbc,
         type: 3}
