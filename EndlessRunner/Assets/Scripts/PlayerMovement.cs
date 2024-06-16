@@ -20,12 +20,6 @@ public class PlayerMovement : MonoBehaviour
     public float jumpCooldown = 1f; // 점프 쿨다운 시간 (초 단위)
 
     [SerializeField] private GameObject prefab;
-    Animator anim;
-
-    private void Awake()
-    {
-        anim = GetComponent<Animator>();
-    }
 
     private void FixedUpdate()
     {
