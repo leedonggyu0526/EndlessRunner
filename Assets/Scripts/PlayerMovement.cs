@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
-        if ((transform.position.y < -5) && alive)
+        if (transform.position.y < -5)
         {
             Die();
         }
@@ -75,11 +75,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Die()
-    {
-        alive = false;
-        GameStarter.GameOver();
-        backgroundMusicController.StopMusic();
-        PlayDeathSound();
+    {   
+        if(alive)
+        {
+            alive = false;
+            GameStarter.GameOver();
+            backgroundMusicController.StopMusic();
+            PlayDeathSound();
+        }
     }
 
     void Restart()
@@ -112,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
     void RotatePlayerAndCamera()
     {
         GameObject belowObject = CheckObjectsBelow();
-        Debug.Log(belowObject);
+        //Debug.Log(belowObject);
         if (belowObject == null) {
             Debug.Log("isNull");
         }else if(belowObject.name == "Road_Left_Corner")
