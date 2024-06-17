@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
-        if (transform.position.y < -5)
+        if ((transform.position.y < -5) && alive)
         {
             Die();
         }
